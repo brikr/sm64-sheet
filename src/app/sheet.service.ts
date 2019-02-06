@@ -1,7 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
+import {shareReplay, switchMap} from 'rxjs/operators';
+import {Memoize} from './memoize.decorator';
 
 const API_URL = 'https://api.sheety.co/19fcbbac-0b55-427c-9b71-cfd2d63cdea8';
 const NON_PLAYER_COLUMNS = [
@@ -17,10 +18,12 @@ export class SheetService {
       private httpClient: HttpClient,
   ) {}
 
+  @Memoize()
   getSheetContents(): Observable<Array<{}>> {
-    return this.httpClient.get<Array<{}>>(API_URL);
+    return this.httpClient.get<Array<{}>>(API_URL).pipe(shareReplay());
   }
 
+  @Memoize()
   getPlayers(): Observable<string[]> {
     return this.getSheetContents().pipe(
         switchMap((response: Array<{}>) => {
@@ -28,6 +31,7 @@ export class SheetService {
           keys = keys.filter(k => !NON_PLAYER_COLUMNS.includes(k));
           return of(keys);
         }),
+        shareReplay(),
     );
   }
 }
