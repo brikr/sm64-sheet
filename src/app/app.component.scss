@@ -1,16 +1,18 @@
-.mat-header-cell, .mat-cell {
-  min-width: 100px;
-  border-right: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.mat-header-cell:not(.star-cell) {
-  text-align: center;
-}
-
-.mat-cell:not(.star-cell) {
-  text-align: right;
-}
-
-.star-cell {
-  min-width: 250px;
+.mat-table {
+  .mat-header-cell, .mat-cell {
+    min-width: 100px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  
+  .mat-header-cell:not(.star-cell) {
+    text-align: center;
+  }
+  
+  .mat-cell:not(.star-cell) {
+    text-align: right;
+  }
+  
+  .star-cell {
+    min-width: 250px;
+  }
 }

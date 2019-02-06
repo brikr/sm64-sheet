@@ -1,6 +1,4 @@
-<div>
-  <h1>Ultimate Star Spreadsheet</h1>
-</div>
+<h1>Ultimate Star Spreadsheet</h1>
 <ng-container *ngIf="contents$ | async as contents; else loading">
   <ng-container class="table-container" *ngIf="players$ | async as players; else loading">
     <table mat-table [dataSource]="contents">
